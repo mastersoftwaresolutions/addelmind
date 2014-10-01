@@ -1,0 +1,42 @@
+/*
+	 CSS-Tricks Example
+	 by Chris Coyier
+	 http://css-tricks.com
+*/
+
+* { margin: 0; padding: 0; }
+#page-wrap { width: 700px; margin: 50px auto; }
+a { text-decoration: none; }
+h3 { margin: 0 0 10px 0; }
+
+.tabs { list-style: none; border-bottom: 1px solid #ccc; width: 100%; display: inline-block; margin-bottom:30px; padding-bottom:10px; overflow: hidden; padding-left: 1px; }
+.tabs li { display: inline; }
+.tabs li a { display: block; letter-spacing:0.70px; float: left; padding: 4px 0px; font-size:14px; color:#47B0BA; font-weight:bold;  margin: 0 0 0 -1px; margin-right:20px; }
+.tabs li a.current { background: white; color:#428BCA; border-bottom: 0; position: relative; z-index: 2; }
+
+.box-wrapper { -moz-box-shadow: 0 0 20px black;  overflow:hidden; -webkit-box-shadow: 0 0 20px black; padding: 20px; background: white;  margin: -1px 0 0 0; min-height: 348px; padding-top:30px; position: relative; }
+.content-box { overflow: hidden; position: absolute; top: 0px ;   background:#fff; margin-top:0px; left:0px; width: 100%; min-height: 348px; }
+
+.current { z-index: 100; }
+
+.col-one, .col-two, .col-three { width: 50%; float: left; position: relative; top: 350px; }
+.col-one, .col-two {  }
+.tabs p
+{
+	text-align:right;
+	color:#999;
+	margin-top:7px;
+	float: right;
+	font-size:16px;
+	margin-bottom:0px;
+}
+.tabs p i
+{
+	color:#555;
+	margin-right:5px;
+}
+.tabs p em
+{
+	font-style:normal;
+	color:#555;
+}

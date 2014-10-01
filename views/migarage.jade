@@ -1,0 +1,92 @@
+extends layout
+
+block content
+  section.profile-container
+    .container
+        .my-garage-heading
+          .row
+            .col-lg-8
+              .my-garage-pic
+                img(src=img, class="garage-pic")
+                uImg = img
+              .grg-t
+                h4 #{ name }
+            .col-lg-4.align-right
+              ul.garage-item
+                li
+                  | 30
+                  i Items
+                li
+                  | 50
+                  i Items
+          h2.garage-tittle
+            | My Garage
+            a(data-toggle='modal', class="network", href='#shareModal')
+              span.garage-fb_bx
+                | Share on
+                i.fa.fa-facebook
+                i.fa.fa-twitter
+                i.fa.fa-renren
+          .clu-border
+        section.wrapper
+          .row
+            .col-lg-12
+              ul
+                if user_data.length != 0 
+                  - each data in user_data
+                    li
+                      .rt_box
+                        .img_box
+                          a(href='#')
+                            img(src='/product_images/'+data.pimage, alt='img1')
+                            .strip 43 Views
+                        .prc #{data.price} Lote completed
+                        .desc_prod
+                          img(src="#{uImg}", alt='clnt_img')
+                          p
+                            strong #{ user.displayName }
+                            br
+                            | #{ data.Location }
+
+      // Footer Start
+  footer.footer_bg
+    .container
+      .row
+        | Developed by
+        a(href='http://www.mastersoftwaresolutions.com') Master Software Solutions
+        //
+           Chile Modal
+        #chillyModal.modal.fade
+          .modal-dialog
+            .modal-content
+              .modal-header
+                button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+                h4#myModalLabel.modal-title Available only in Chile
+              .modal-body
+                .modal-info
+                  p
+                    | For now Junkstr operates only in Chile. If you are interested in having your country Junkstr
+                    a(href='javascript:void(0);') vote on this form
+
+
+  #shareModal.modal.fade
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(aria-hidden='true', data-dismiss='modal', type='button') ×
+          h4#myModalLabel.modal-title Share
+        .modal-body
+          .modal-info
+            .addthis_toolbox.addthis_default_style.addthis_32x32_style
+              a.addthis_button_preferred_1
+              a.addthis_button_preferred_2
+              a.addthis_button_preferred_3
+              a.addthis_button_preferred_4
+              a.addthis_button_compact
+            script(type='text/javascript')
+              var addthis_config = {"data_track_addressbar":true};
+            script(src='//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-50d075f1062fea96', type='text/javascript')
+            .share-social-icons
+              h4  Short Link
+              .add-this-content
+                input(type='tel', value='https://juncstr.com/user/#{username}', id='shareurl')                    

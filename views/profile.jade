@@ -1,0 +1,66 @@
+extends layout
+
+block content
+  section.profile-container
+    .container
+      .profile-heading
+              h2.main-tittle  Profile Details
+              .clu-border
+            .profile-tab
+              ul.nav.nav-tabs
+                li.active
+                  a(href='#home', data-toggle='tab') Profile
+                li
+                  a(href='#profile', data-toggle='tab') Notification
+              .tab-content
+                #home.tab-pane.active
+                  .prifle_flds
+                    
+                    if user.image
+                      img = user.image
+                    form(class = "image-upload" , action='/upload/image', method='post', enctype='multipart/form-data')
+                      img(src='#{img}')
+                      .profile-view-pan
+                        input(type='file', class="input-file-style", name='key', ng-file-select="onFileSelect($files)")
+                        //a(href='javascript:void(0);')  Upload a new image</a>
+                        input(type='hidden', value=user.fbid, name='id')
+                        input(type='submit', class="absolute-input", id="submit-form",name='submit', value='Upload a image')
+
+                  form(action='/upload', enctype='multipart/form-data', method='post')
+
+
+                    .prfl-ipt-container
+                      .prifle_flds
+                        label Name
+                        input(type='text' , value=user.full_name , name="full_name")
+                        input(type='hidden', value=user.fbid, name='id')
+                        p Your real name and Juan Parez.
+                      .prifle_flds
+                        label User Name
+                        input(type='text' , value=user.username , name="username")
+                        if user.username
+                          username = user.username
+                        p https://juncstr.com/user/#{username}
+                      input.save-profile(type='submit', value='Save Profile')
+                #profile.tab-pane v.
+      //
+         Footer Start
+  footer.footer_bg
+    .container
+      .row
+        | Developed by
+        a(href='http://www.mastersoftwaresolutions.com') Master Software Solutions
+        //
+           Chile Modal
+        #chillyModal.modal.fade
+          .modal-dialog
+            .modal-content
+              .modal-header
+                button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+                h4#myModalLabel.modal-title Available only in Chile
+              .modal-body
+                .modal-info
+                  p
+                    | For now Junkstr operates only in Chile. If you are interested in having your country Junkstr
+                    a(href='javascript:void(0);') vote on this form
+

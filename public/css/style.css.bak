@@ -1,0 +1,130 @@
+#mapper{
+    min-width:32px;
+    min-height:32px;
+    z-index:1000;
+    position:absolute;
+    top:0;
+    display:none;
+}
+.main {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+    padding: 20px;
+    width: 60%;
+    height: auto;
+    min-height: 400px;
+}
+
+#planetmap div{
+
+    display:block;
+    position:absolute;
+}
+
+#main_panel{
+    margin: auto;
+    padding: 10px;
+    width: 1000px;
+}
+
+#form_panel{
+   display: none;
+/*            min-height: 150px;
+    min-width: 200px;
+    position: absolute;
+    top: 0;
+    z-index: 1000;
+    background: #FFFFFF;*/
+}
+
+#form_panel input,textarea{
+    padding:3px;
+    background:#FFF;
+    border:1px solid #CFCFCF;
+    color:#000;
+}
+
+#image_panel{
+    width:600px;
+    position:relative;
+}
+#image_panel img{
+    left:0;top:-102px;
+    max-width: 600px;
+    overflow: hidden;
+
+}
+
+#form_panel .label{
+    float:left;
+    width:80px;
+    padding:5px;
+}
+
+#form_panel .field{
+    float:left;
+    width:200px;
+    padding:5px;
+}
+
+#form_panel .row{
+    clear:both;
+}
+
+.tagged_title{
+    color: #777;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 3px;
+}
+.tagged_title span{
+    color: #135DA5;
+}
+.tagged {
+    background: url("../img/tag_img.png") repeat scroll 0 0 / 100% auto rgba(0, 0, 0, 0);
+}
+.tagged-cont {
+    background: none repeat scroll 0 0 #FFFFFF;
+    height: 96px;
+    display: none;
+    padding: 10px 15px;
+    top: 36px;
+    width: 200px;
+    border-radius:5px;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+    color: #777777;
+}
+
+#tag_png{
+    height: 32px;
+    position: absolute;
+    top: 0 !important;
+}
+
+#info_panel{
+    padding:10px;
+    margin:20px 0;
+    background:#eee;
+}
+
+#popOverBox label {
+    float: left;
+    width: 100%;
+}
+#popOverBox .checkbox-inline {
+    width: 22%;
+}
+#popOverBox .form-group {
+    margin-bottom: 2px;
+}
+#popOverBox .price{
+    float: left;
+}
+#popOverBox input , textarea {
+    float: left;
+}
+#popOverBox  #add-title {
+ margin: 10px 0;
+}

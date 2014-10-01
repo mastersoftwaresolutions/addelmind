@@ -1,0 +1,33 @@
+extends layout
+
+block content
+    section.profile-container
+        .container
+            .profile-heading
+              h2.main-tittle  Confirm Lot 
+            br
+            br
+            p
+              | You must book the  
+              a(href='/lot/#{pdata[0].pid}') Lot # #{pdata[0].pid} 
+              | to continue with the purchase. Performs reservation if you want to specify in the next 48 hours . If you need to arrange something with the seller
+              a(href='/lot/#{pdata[0].pid}')  Send him a question 
+              | 
+              | before
+              br
+              br
+              | You are booking for the lot. If you are interested in only one article 
+              a(href='/lot/#{pdata[0].pid}')   returns to the batch 
+              | and click the item you're interested.
+              br
+              br
+            p
+              | The reservation will give you the contact details of the advertiser.
+      // Footer Start
+    footer.footer_bg
+      .container
+        .row
+          | Developed by
+          a(href='http://www.mastersoftwaresolutions.com') Master Software Solutions
+
+                     

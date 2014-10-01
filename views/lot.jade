@@ -1,0 +1,224 @@
+extends layout
+
+block content
+    section.product-details
+      .container
+        .row
+          .col-sm-9.profile-thumbnail
+            .img-link.nav-img-link
+              .img-link-inner
+                img(src='#{lot[0].image}')
+                p
+                  | #{lot[0].full_name}
+                  i.fa.fa-sort-down
+                  a(href='javascript:void(0);') Lots##{lot[0].pid}
+              .hover-profile
+                h4  #{lot[0].full_name}
+                a(href='/user/#{lot[0].uid}') #{lot[0].username}
+                ul.articl
+                  li
+                    a(href='javascript:void(0);')
+                      i.fa.fa-thumbs-o-up
+                      | Lotes
+                  li
+                    a(href='javascript:void(0);')
+                      i.fa.fa-laptop
+                      | Articles
+          .col-sm-3
+            ul.social-link
+              li
+                a(href='#')
+                  span.fb_bx
+                    i.fa.fa-facebook &nbsp
+                    | I  like
+              li
+                a(data-toggle='modal', href='#shareModal')
+                  span.fb_bx2
+                    |   Share on &nbsp
+                    i.fa.fa-facebook &nbsp &nbsp
+                    i.fa.fa-twitter &nbsp &nbsp
+                    i.fa.fa-renren &nbsp
+        .row
+          .col-lg-12
+            .img-slider
+              img(src='/product_images/#{lot[0].pimage}')
+              if lot[0].singal_imgs != ''
+                span.hover-display
+                  single = lot[0].singal_imgs.split(',')
+                  top = lot[0].top_position.split(',')
+                  left = lot[0].left_position.split(',')
+                  prices = lot[0].single_imgs_prices.split(',')
+                  dec = lot[0].tag_dec.split(',')
+                  title = lot[0].tag_title.split(',')
+                  -for(var ix = 0; ix < single.length; ix++)
+                    span(id="#{ix+1}").image-tag.icon-junkstr-tag(style="top: #{top[ix]}px; left: #{left[ix]}px;")
+                      .tagged-cont(style='display: none;')
+                        .tagged_img
+                          img#tg(src='../product_images/#{single[ix]}')
+                        .tag-int
+                          .tagged_title(style='display: none;')
+                              span Title: 
+                              p.tag_title #{title[ix]}
+                          .tagged_price(style='top: 35px;')
+                            span Price: 
+                            p.tag_price #{prices[ix]}
+                        .tagged_dec(style='top: 60px;')
+                          span Description: 
+                          p.tag_dec #{dec[ix]}
+                        
+
+              .leftControl
+              .rightControl
+          .col-lg-12
+            p.slot-info
+              if lot[0].Description
+                div #{lot[0].Description}
+
+            #slot-machine-tabs
+              ul.tabs
+                li
+                  a(data-toggle='tab', href='#one') About this set
+                li
+                  a(data-toggle='tab', href='#two') Offers
+                li
+                  a(data-toggle='tab', href='#three') Share
+                i.report-modal-popup(data-toggle='modal', data-target='#reportModal') Report
+                p
+                  i.fa.fa-eye
+                  em 265
+                  | views
+              .box-wrapper
+                #one.content-box
+                  .row
+                    .col-one.col.col-lg-6
+                      .product-pstd-dtl
+                        p.desc-slot-info
+                          if lot[0].Description
+                            div #{lot[0].Description}
+                        span.posted-product
+                          | Posted by
+                          a(href='/lot/#{lot[0].pid}')  #{lot[0].full_name}
+                          date1 = new Date()
+                          date2 = new Date(lot[0].pdate)
+                          one_day = 1000 * 60 * 60 * 24
+                          days = Math.ceil( (date2.getTime() - date1.getTime() ) / one_day)
+                          | - #{days} day ago
+                      .posted-loc
+                        h4  Location
+                        p= lot[0].Location
+                      .posted-loc
+                         h4 Categories
+                         -var ob = JSON.parse(lot[0].categories)
+                         -for(var prop in ob)
+                           a(href="#") #{ob[prop]}
+
+                      .btn-links
+                        a(href='javascript:void(0);') Question about an article
+                        a(href='javascript:void(0);') Ask about the lot
+                      a.link-brows(href='javascript:void(0);') Ver preguntas sobre el lote
+                    .col-two.col.col-lg-6
+                      .content-fld
+                        .tab-left-cntnt
+                          | Full Lot
+                        .tab-right-cntnt
+                          h4 #{lot[0].price}
+                          .buy-lot
+                            if user
+                              a.buy-lot-btn(href='/reserve/?origin=direct&type=lot&id=#{lot[0].pid}') Buy Lot
+                            else 
+                              a.buy-lot-btn(data-toggle='modal', href='#commentModal') Buy Lot
+                            p OR
+                            a.buy-lot-link(href='javascript:void(0);') &nbsp &nbsp Make offer for the lot
+                      .content-fld
+                        if subdata.length > 0
+                          .tab-left-cntnt
+                              | In this set
+                            .tab-right-cntnt
+                              .buy-lot
+                                  -for(var ix = 0; ix< subdata.length; ix++)
+                                    a.buy-lot-link(href='/item/#{subdata[ix].id}') #{subdata[ix].tag_title}
+                                    br
+                        
+                                    
+                #two.content-box
+                  .col-two.col.width-hundred.submit-bid
+                    img(src='/img/not-sbmut.png')
+                    p
+                      | You have not submitted any bids.
+                      a(href='javascript:void(') Bidding
+                #three.content-box
+                  .col-two.col.width-hundred
+                    .share-wd
+                      | Share with your friend on social network
+                    .social-icons
+                      h4  Share On
+                      .add-this-content
+                        .addthis_toolbox.addthis_default_style.addthis_32x32_style
+                          a.addthis_button_preferred_1
+                          a.addthis_button_preferred_2
+                          a.addthis_button_preferred_3
+                          a.addthis_button_preferred_4
+                          a.addthis_button_compact
+                          a.addthis_counter.addthis_bubble_style
+                        script(type='text/javascript')
+                          var addthis_config = {"data_track_addressbar":true};
+                        script(src='//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-50d075f1062fea96', type='text/javascript')
+    footer.footer_bg
+      div.container
+        div.row
+          | Developed by
+          a(href='http://www.mastersoftwaresolutions.com') Master Software Solutions
+
+    #reportModal.modal.fade
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(aria-hidden='true', data-dismiss='modal', type='button') ×
+            h4#myModalLabel.modal-title Report Content
+          .modal-body
+            .modal-info
+              p
+                | You can
+                a(href='javascript:void(0);')  get in touch
+                | with us to report content. In the future we will implement a simpler method.
+
+    #shareModal.modal.fade
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(aria-hidden='true', data-dismiss='modal', type='button') ×
+            h4#myModalLabel.modal-title Share
+          .modal-body
+            .modal-info
+              .addthis_toolbox.addthis_default_style.addthis_32x32_style
+                a.addthis_button_preferred_1
+                a.addthis_button_preferred_2
+                a.addthis_button_preferred_3
+                a.addthis_button_preferred_4
+                a.addthis_button_compact
+                a.addthis_counter.addthis_bubble_style
+              .share-social-icons
+                h4  Short Link
+                .add-this-content
+                  input(type='tel')
+
+    
+    #commentModal.modal.fade
+      .modal-dialog
+          .modal-content
+            .modal-header
+              button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+              h4#myModalLabel.modal-title Please Login
+            .modal-body
+              .modal-info
+                p
+                  | To participate and interact with other people you must sign. You can enter immediately with Facebook.
+                br
+                p Use your Facebook account
+                br
+                span.fb-lgn
+                  a.fb_bx(href='/auth/facebook/')
+                    i.fa.fa-facebook
+                    | Login with Facebook
+                br
+                br                

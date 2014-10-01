@@ -1,0 +1,44 @@
+extends layout
+
+block content
+  section.profile-container
+    .container
+        .my-garage-heading
+          h2.garage-tittle
+            | results for #{message}
+        section.wrapper
+          div.container
+              .row
+                .col-lg-12
+                    ul
+                      if search_products.length > 0
+                        each product in search_products
+                          single = product.singal_imgs.split(',')
+                          price = product.top_position.split(',')
+                          -for(var ix = 0; ix < single.length; ix++)
+
+                            li
+                              .rt_box
+                                .img_box
+                                  a(href='#')
+                                    img(src='/product_images/'+single[ix], alt='img1')
+                                    .strip 43 Views
+                                .prc #{price[ix]}
+                                .desc_prod
+                                  
+                                  img(src="#{product.image}", alt='clnt_img')
+                                  p
+                                    strong #{ product.full_name }
+                                    br
+                                    | #{ product.Location }       
+                      else
+                        text = '"'+ message +'"'
+                        dd = "We found nothing for "  
+                        li
+                          p= dd + text 
+
+  footer.footer_bg
+    .container
+        .row
+          | Developed by
+          a(href='http://www.mastersoftwaresolutions.com') Master Software Solutions

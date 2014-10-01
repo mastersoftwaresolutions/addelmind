@@ -1,0 +1,69 @@
+extends layout
+
+block content
+  section.profile-container
+    .container
+        .my-garage-heading
+          .row
+            .col-lg-9
+              h1= category1
+
+
+              .grg-t
+                h4
+            .col-sm-3
+              ul.social-link
+                li
+                  a(href='#')
+                    span.fb_bx
+                      i.fa.fa-facebook &nbsp
+                      | I  like
+                li
+                  a(data-toggle='modal', href='#shareModal')
+                    span.fb_bx2
+                      |   Share on &nbsp
+                      i.fa.fa-facebook &nbsp &nbsp
+                      i.fa.fa-twitter &nbsp &nbsp
+                      i.fa.fa-renren &nbsp
+        section.wrapper
+          .row
+            .col-lg-12
+              ul
+                if category.length != 0
+                  - each data in category
+                    li
+                      .rt_box
+                        .img_box
+                          a(href='/lot/#{data.pid}')
+                            img(src='/product_images/'+data.pimage, alt='img1')
+                            .strip 43 Views
+                        .prc #{data.price} Lote completed
+                        .desc_prod
+                          img(src="#{data.image}", alt='clnt_img')
+                          p
+                            strong #{ data.full_name }
+                            br
+                            | #{ data.Location }
+                else
+                  li
+                    .error You have nothing here. Start publishing.
+
+      // Footer Start
+  footer.footer_bg
+    .container
+      .row
+        | Developed by
+        a(href='http://www.mastersoftwaresolutions.com') Master Software Solutions
+        //
+           Chile Modal
+        #chillyModal.modal.fade
+          .modal-dialog
+            .modal-content
+              .modal-header
+                button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+                h4#myModalLabel.modal-title Available only in Chile
+              .modal-body
+                .modal-info
+                  p
+                    | For now Junkstr operates only in Chile. If you are interested in having your country Junkstr
+                    a(href='javascript:void(0);') vote on this form

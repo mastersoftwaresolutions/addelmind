@@ -1,0 +1,82 @@
+extends layout
+
+block content
+   section.page-wrapper
+     div.container
+       div.row
+         div.col-lg-10
+           h3   Post batch
+             a(href="javascript:void(0)" , id="go-back-cat") Go Back
+         div.col-lg-2
+           input(type="button" , class="btn btn-danger" , id="continue-pub" , value="Continue publication")
+       div.msg
+
+       div.file-upload
+         span
+           i(class="fa fa-upload")
+         fieldset(id="zone")
+           legend  Select or drag here pictures of your entire batch
+
+           p Or click here to
+             em Browse
+       form
+         div.category
+           ul.overflow-auto
+             li(ng-repeat='(typeKey, typeVal) in inputs')
+               ul.overflow-auto
+                 li(ng-repeat='value in typeVal')
+                   label
+                     input(type='checkbox', ng-model='x', ng-change='setOutput(typeKey, $index, value)')
+                     font
+                       font {{value}}
+
+           div.action
+             div
+               input(type="button" , class="btn btn-danger" ,id="continue" ,value="Continue")
+               span or
+               a(href="javascript:void(0)" , id="go-back") Go Back
+
+         div.full-tag
+           div(id="loading_layer" , style="display: none")
+             img(src="img/loading.gif" , class="ajax-loader")
+
+           div.form-full
+              form(name="myForm")
+               .form-group#price
+                 label(for='price') Lot Pricing
+                 input#full-price.form-control(type='text',  ng-model="formData.full_price" , placeholder='Enter Price')
+               .form-group
+                 label(for='description') Description
+                   span  (Optional)
+                 textarea#full-description.form-control(ng-model="formData.full_description")
+               .form-group
+                 label(for='Location') Location
+                 input#full-location.form-control(type='text',ng-model="formData.full_location" ,placeholder='Enter Your Location')
+
+               input(type="submit" , ng-click="createLot(#{user.id})" , class="btn btn-danger" ,id="post-lot" , value="Post Lot")
+               span or
+
+               a(href="javascript:void(0)" , id="go-back-full") Go Back
+       div.procces
+         p Make a batch of articles by clicking on the picture
+       div.chosse
+         div
+           input(type="button" , class="btn btn-danger" , id="choose-this" , value="Use this photo")
+           div(class="fileUpload btn btn-default")
+             span Choose another photo
+             input(type="file", class="upload", id="another-one")
+
+
+
+       div.image-preview
+         div.img
+           img(id="imageMap", src="#" , alt="")
+           div(id='mapper')
+             img(src='img/tag_img.png' , width="32")
+           br
+           img(scr='' , id='tagImg')
+           div(id="planetmap")
+           div(id='mapper2')
+           input(type="hidden" , id="tag-photo" , value="")
+
+     script(type='text/javascript' , src='/js/script.js')

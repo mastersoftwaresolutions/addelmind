@@ -1,0 +1,56 @@
+extends layout
+
+block content
+  section.banner
+    .noise
+        .banner_cont
+            h1 Your Online Garage Sale
+            p
+              | Ditch your batch cachureos, discover amazing things
+              br
+              | that others do not already use.
+            .btn_bx
+              a.post_lot(href='/publish')
+                i.fa.fa-edit
+                |  Post Lot
+              a.see_video(href='#')
+                i.fa.fa-video-camera
+                |  See Video
+
+  section.wrapper
+    div.container
+        .row
+            .col-lg-8
+                h2 New & Noteworthy
+              .col-lg-4
+        .row
+            .col-lg-12
+                ul
+                if alllots
+                  each lot in alllots
+                    li
+                      .rt_box
+                        .img_box
+                          a(href='/lot/#{lot.pid}')
+                            img(src='product_images/#{lot.pimage}', alt='img1')
+                            if lot.singal_imgs != ''
+                              span.hover-display
+                                single = lot.singal_imgs.split(',')
+                                top = lot.top_position.split(',')
+                                left = lot.left_position.split(',')
+                                -for(var ix = 0; ix < single.length; ix++)
+                                  span.image-tag.icon-junkstr-tag(style="top: #{top[ix]}%; left: #{left[ix]}%;")
+                        .prc= lot.price
+                        .desc_prod  
+                          img(src='#{lot.image}', alt='clnt_img')
+                          p
+                            strong= lot.full_name
+                            br
+                            | #{lot.Location}
+
+
+  footer.footer_bg
+    .container
+        .row
+          | Developed by
+          a(href='http://www.mastersoftwaresolutions.com') Master Software Solutions

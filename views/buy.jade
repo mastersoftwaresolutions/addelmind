@@ -1,0 +1,199 @@
+extends layout
+
+block content
+
+  section.product-details
+      .container
+          .row
+            .col-sm-9.profile-thumbnail
+              .img-link
+                .img-link-inner
+                  .profil-cntnt-bd.nav-img-link
+                    img(src='#{products[0].image}')
+                    .hover-profile
+                      h4  #{products[0].full_name}
+                      a(href='/user/#{products[0].username}') #{products[0].username}
+                      ul.articl
+                        li
+                          a(href='javascript:void(0);')
+                            i.fa.fa-thumbs-o-up
+                            | 10 Votes
+                        li
+                          a(href='javascript:void(0);')
+                            i.fa.fa-laptop
+                            | 50 Articles
+                  p(style='margin-left: 0px;')
+                    i.fa.fa-sort-down
+                    a(href='javascript:void(0);') Lots#1658
+                    i.fa.fa-caret-right
+                    .hdng-dtl    
+                      a(href='javascript:void(0);') #{products[0].tag_title} 
+            .col-sm-3
+              ul.social-link
+                li
+                  a(href='#')
+                    span.fb_bx
+                      i.fa.fa-facebook
+                      | I like
+                li
+                  a(href='#shareModal', data-toggle='modal')
+                    span.fb_bx2
+                      | Share on
+                      i.fa.fa-facebook
+                      i.fa.fa-twitter
+                      i.fa.fa-renren
+          .row
+            .content-fld-buy
+              .col-lg-4
+                img.buy-img(src='../product_images/#{products[0].product_img}')
+              .col-lg-8
+                .buy-content-fld
+                  .prduct-heading
+                    | #{products[0].tag_title} 
+                  .dtl-tab-right-cntnt
+                    h4 #{products[0].product_prices}    
+                    .dtl-buy-lot
+                      if user
+                        a.dtl-buy-lot-btn(href='#') Buy Lot
+                      else 
+                        a.dtl-buy-lot-btn(data-toggle='modal', href='#commentModal') Buy Lot
+                      p OR
+                      a.dtl-buy-lot-link(href='javascript:void(0);') Make offer for the lot
+                  .prduct-posted-loc
+                    h4  Location
+                    p #{products[0].location}    
+            .col-lg-12
+              #slot-machine-tabs
+                ul.tabs
+                  li
+                    a(href='#one', data-toggle='tab') About this set
+                  li
+                    a(href='#two', data-toggle='tab') Offers
+                  li
+                    a(href='#three', data-toggle='tab') Share
+                  i.report-modal-popup(data-target='#reportModal', data-toggle='modal') Report
+                  p
+                    i.fa.fa-eye
+                    em 265
+                    | views
+                .box-wrapper
+                  #one.content-box
+                    .row
+                      .col-one.col.col-lg-6
+                        .product-pstd-dtl
+                          p.desc-slot-info
+                            | #{products[0].tag_dec}    
+                          span.posted-product
+                            | Posted by
+                            a(href='javascript:void(0);')  #{products[0].full_name}
+
+                            date1 = new Date()
+                            date2 = new Date(products[0].pdate)
+                            one_day = 1000 * 60 * 60 * 24
+                            days = Math.ceil( (date2.getTime() - date1.getTime() ) / one_day)    
+                            | - #{days} day ago
+                        .posted-loc
+                          h4  Other searches
+                          a(href='javascript:void(0);') Toy,
+                          a(href='javascript:void(0);') Video game,
+                          a(href='javascript:void(0);') Dummy Link,
+                          a(href='javascript:void(0);') Text Dummy
+                        .comment-fld
+                          .comment-default-pic.fa.fa-user
+                          .comment-txera
+                            textarea
+                            span.chckbox-bidding
+                              input#checkboxG4.css-checkbox(type='checkbox', name='checkboxG4')
+                              label.css-label(for='checkboxG4') I am bidding
+                            .send-ques
+                              a.send-lot-btn(href='javascript:void(0);') Send Question
+                              p OR
+                              a.buy-lot-link(href='javascript:void(0);') Cancel
+                      .col-two.col.col-lg-6
+                        .content-fld
+                          .tab-left-cntnt
+                            | In this set
+                          .tab-right-cntnt
+                            .buy-lot
+                              if subdata.length > 0
+                                -for(var ix=0;ix < subdata.length; ix++)
+                                  a.buy-lot-link(href='/item/#{subdata[ix].id}') #{subdata[ix].tag_title}
+                                  br
+                            a.send-lot-btn(href='/lot/#{products[0].pid}')  View full batch
+                  #two.content-box
+                    .col-two.col.width-hundred.submit-bid
+                      img(src='dist/img/not-sbmut.png')
+                      p
+                        | You have not submitted any bids.
+                        a(href='javascript:void(') Bidding
+                  #three.content-box
+                    .col-two.col.width-hundred
+                      .share-wd
+                        | Share with your friend on social network
+                      .social-icons
+                        h4  Share On
+                        .add-this-content
+                          //
+                             AddThis Button BEGIN 
+                          .addthis_toolbox.addthis_default_style.addthis_32x32_style
+                            a.addthis_button_preferred_1
+                            a.addthis_button_preferred_2
+                            a.addthis_button_preferred_3
+                            a.addthis_button_preferred_4
+                            a.addthis_button_compact
+                            a.addthis_counter.addthis_bubble_style
+                      .social-icons
+                        h4  Short Link
+                        .add-this-content
+                          input(type='tel')
+      //
+         Footer Start 
+      footer.footer_bg
+        .container
+          .row
+            | Developed by
+            a(href='http://www.mastersoftwaresolutions.com') Master Software Solutions
+
+
+  #shareModal.modal.fade
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(aria-hidden='true', data-dismiss='modal', type='button') ×
+          h4#myModalLabel.modal-title Share
+        .modal-body
+          .modal-info
+            .addthis_toolbox.addthis_default_style.addthis_32x32_style
+              a.addthis_button_preferred_1
+              a.addthis_button_preferred_2
+              a.addthis_button_preferred_3
+              a.addthis_button_preferred_4
+              a.addthis_button_compact
+            script(type='text/javascript')
+              var addthis_config = {"data_track_addressbar":true};
+            script(src='//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-50d075f1062fea96', type='text/javascript')
+            .share-social-icons
+              h4  Short Link
+              .add-this-content
+                input(type='tel')
+
+
+  #commentModal.modal.fade
+    .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+            h4#myModalLabel.modal-title Please Login
+          .modal-body
+            .modal-info
+              p
+                | To participate and interact with other people you must sign. You can enter immediately with Facebook.
+              br
+              p Use your Facebook account
+              br
+              span.fb-lgn
+                a.fb_bx(href='/auth/facebook/')
+                  i.fa.fa-facebook
+                  | Login with Facebook
+              br
+              br  

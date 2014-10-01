@@ -1,0 +1,172 @@
+doctype 5
+html(ng-app="facts")
+  head
+    title Add el mind!
+    html(xmlns='http://www.w3.org/1999/xhtml', xmlns:fb='http://ogp.me/ns/fb#')  
+    meta(property='og:url', content='http://www.example.com')
+    meta(property='og:title', content='Example Title')
+    meta(property='og:description', content='Example Title Description')
+    meta(property='og:image', content='http://www.example.com/logo.gif')
+
+
+    link(rel='stylesheet', href='/css/bootstrap.css')
+    link(rel='stylesheet', href='/css/bootstrap-theme.css')
+    link(rel='stylesheet', href='/css/docs.css')
+    link(rel='stylesheet', href='/css/jquery-ui.css')
+    link(rel='stylesheet', href='/fonts/font-awesome.css')
+    link(rel='stylesheet', href='/css/style.css')
+    link(rel='stylesheet', href='/css/slotemachine.css')
+    link(href='http://fonts.googleapis.com/css?family=Open+Sans', rel='stylesheet' , type='text/css')
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js')
+    script(src='/js/angular-file-upload-shim.js')
+    script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js')
+    script(src='/js/jquery-ui.js')
+    script(src='/js/angular-file-upload.min.js')
+    script(src='/js/bootstrap.js')
+    script(src='/js/core.js')
+    script(src='/js/tagscript.js')
+    script(src='/js/jquery-formatCurrency.js')
+    script(src='/js/filedrop.js')
+    script(src='/js/slotmachine.js')
+
+  body(ng-controller="mainController")
+    div(class="navbar navbar-default navbar-static-top" ,role="navigation")
+      div.container
+        div.navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='/')
+            img(alt='logo', src='/img/logo.png')
+
+        div(class="navbar-collapse collapse")
+          ul.nav.navbar-nav
+            li
+                a(href='#') Chile
+              li.dropdown
+                a.dropdown-toggle(data-toggle='dropdown', href='#')
+                  i.fa.fa-bars
+                  |  Explore
+                ul.dropdown-menu.drop_menu
+                 li
+                    a(href='/explore/Art') Arte
+                  li
+                    a(href='/explore/Antiques') Antiguedades
+                  li
+                    a(href='/explore/Cameras and Accessories') Cámaras y accesorios
+                  li
+                    a(href='/explore/Phones and Telephones') Celulares y telefonía
+                  li
+                    a(href='/explore/Collectibles') Coleccionables
+                  li
+                    a(href='/explore/Computing') Computación
+                  li
+                    a(href='/explore/Hobbies') Hobbies
+                  li
+                    a(href='/explore/Sports') Deportes
+                  li
+                    a(href='/explore/Appliances') Electrodomésticos
+                  li
+                    a(href='/explore/Electronics') Electrónica
+                  li
+                    a(href='/explore/Home and furniture') Hogar y muebles
+                  li
+                    a(href='/explore/Musical Instruments') Instrumentos musicales
+                  li
+                    a(href='/explore/Toys') Juguetes
+                  li
+                    a(href='/explore/Books') Libros y revistas
+                  li
+                    a(href='/explore/Music') Música
+                  li
+                    a(href='/explore/Watches') Relojes
+                  li
+                    a(href='/explore/Video') Videojuegos
+                  li
+                    a(href='/explore/Movies') Películas
+                  li
+                    a(href='/explore/Clothing') Ropa
+
+              li.search-hide
+                a(href='javascript:void(0);')
+                    i.fa.fa-search.search-td 
+                    | Search
+              li.search-input-show(style='display: none;')
+                form(action='/search/items/')
+                  input(type='text',  name='q', placeholder='Search')
+                  a.search-icon(href='javascript:void(0);')
+                    i.fa.fa-search
+                  a.close-search.fa.fa-times(href='javascript:void(0);')
+            
+          ul.nav.navbar-nav.navbar-right
+              li.dropdown
+                if user
+                  div.upic
+                    if img
+                      img(src=img)
+                    else if img1
+                      img(src=img1)
+                    else if user.image
+                      img(src=user.image)
+                    else 
+                      img(src=user[0].image)      
+
+                  if typeof user.username
+                    username = user.username
+                  else if user[0].username 
+                    username = user[0].username
+                  else
+                    email = user.emails[0].value
+                    find_user = email.split('@')
+                    username = find_user[0]
+                  
+
+                  div.uname
+                    if user.full_name
+                      dname = user.full_name
+                    else 
+                      dname = user.displayName
+                    a.dropdown-toggle(data-toggle='dropdown', href='#')= dname
+                      b(class="caret")
+                    ul.dropdown-menu
+                      li
+                        a(href='/user/'+username) Mi garage
+                      li.user-profile
+                        a(href='/profile/settings') Configuration
+                      li
+                        a(href='/logout') Leave
+                else
+                  a(href='/auth/facebook')
+                    span.fb_bx
+                      i.fa.fa-facebook
+                      | &nbsp&nbsp&nbspLogin with Facebook
+              li
+                a(href='/publish')
+                  i.fa.fa-edit
+                  |  Post Lot
+              li.dropdown
+                a.dropdown-toggle(data-toggle='dropdown', href='#')
+                  | More
+                  b.caret
+                ul.dropdown-menu
+                  li
+                    a(href='#') About
+                  li
+                    a(href='#') Terms
+                  li
+                    a(href='#')
+                      i.fa.fa-facebook
+                      | Facebook
+                  li
+                    a(href='#')
+                      i.fa.fa-twitter
+                      | Twitter
+                  li
+                    a(href='#')
+                      i.fa.fa-renren
+                      | Blog
+
+
+    block content
